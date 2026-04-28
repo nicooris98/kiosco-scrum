@@ -1,7 +1,8 @@
 class Product:
-    def __init__(self,name, price, stock):
+    def __init__(self,name, price, stock, id=0):
         if price < 0:
             raise ValueError("Precio negativo")
+        self._id = id
         self._name = name
         self._price = price
         self._stock = stock
@@ -38,6 +39,7 @@ class Product:
 
     def to_dict(self):
         return {
+            "id": self._id,
             "name": self._name,
             "price": self._price,
             "stock": self._stock
