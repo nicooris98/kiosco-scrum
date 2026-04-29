@@ -2,11 +2,12 @@ from product import Product
 from sell import Sell
 
 class Item:
-    def __init__(self, product: Product, quantity, sell: Sell, id=None):
+    def __init__(self, product: Product, quantity, sell: Sell, subtotal, id=None):
         self._id = id
         self._product = product
         self._quantity = quantity
         self._sell = sell
+        self._subtotal = subtotal
 
     @property
     def quantity(self):

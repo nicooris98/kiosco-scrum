@@ -4,18 +4,26 @@ from item import Item
 
 #Clase Venta
 class Sell:
-    def __init__(self, date=None, id=None):
+    def __init__(self, date=None, total=None, id=None):
         self._id = id
         if(date):
             self._date = date
         else:
             self._date = dt.datetime.now().isoformat()
+
+        if(total):
+            self._total = total
+        else:
+            self._total = 0
         self._items = []
-        self._total = 0
 
     @property
     def total(self):
         return self._total
+
+    @property
+    def date(self):
+        return self._date
 
     def calcular_total(self):
         for item in self._items:
