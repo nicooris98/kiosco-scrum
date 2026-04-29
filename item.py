@@ -1,8 +1,6 @@
-from product import Product
-from sell import Sell
 
 class Item:
-    def __init__(self, product: Product, quantity, sell: Sell, subtotal, id=None):
+    def __init__(self, product, quantity, sell, subtotal, id=None):
         self._id = id
         self._product = product
         self._quantity = quantity

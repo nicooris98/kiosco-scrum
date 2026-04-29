@@ -1,6 +1,4 @@
 import datetime as dt
-from product import Product
-from item import Item
 
 #Clase Venta
 class Sell:
@@ -29,7 +27,8 @@ class Sell:
         for item in self._items:
             self._total += item.subtotal
 
-    def add_item(self, producto: Product, cantidad):
+    def add_item(self, producto, cantidad):
+        from item import Item
         self._items.append(Item(producto, cantidad))
 
     def to_dict(self):

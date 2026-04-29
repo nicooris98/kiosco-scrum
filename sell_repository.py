@@ -1,7 +1,4 @@
 import sqlite3
-from item import Item
-from product import Product
-from sell import Sell
 
 class SellRepository:
 
@@ -24,7 +21,7 @@ class SellRepository:
                 """
             )
 
-    def insertar_venta(self, sell: Sell):
+    def insertar_venta(self, sell):
         with self.conectar() as con:
             cur = con.execute(" INSERT INTO sells(date, total) values (?, ?)",
                 (

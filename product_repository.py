@@ -1,5 +1,4 @@
 import sqlite3
-from product import Product
 
 class ProductRepository:
 
@@ -23,7 +22,7 @@ class ProductRepository:
                 """
             )
 
-    def insertar_producto(self, producto: Product):
+    def insertar_producto(self, producto):
         with self.conectar() as con:
             cur = con.execute(" INSERT INTO products(name, price, stock) values (?, ?, ?)",
                 (
@@ -33,6 +32,7 @@ class ProductRepository:
             return True
         
     def get_all_products(self):
+        from product import Product
         with self.conectar() as con:
             con.row_factory = sqlite3.Row
             rows = con.execute("SELECT * FROM products").fetchall()

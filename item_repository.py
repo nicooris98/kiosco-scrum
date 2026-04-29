@@ -1,7 +1,5 @@
 import sqlite3
-from item import Item
-from product import Product
-from sell import Sell
+
 
 class ItemDetailRepository:
 
@@ -26,7 +24,7 @@ class ItemDetailRepository:
                 """
             )
 
-    def insertar_detalle(self, item: Item):
+    def insertar_detalle(self, item):
         with self.conectar() as con:
             cur = con.execute(" INSERT INTO item_details(product_id, sell_id, quantity, subtotal) values (?, ?, ?, ?)",
                 (
@@ -36,6 +34,9 @@ class ItemDetailRepository:
             return True
         
     def get_details_by_sell(self, sell_id):
+        from item import Item
+        from product import Product
+        from sell import Sell
         with self.conectar() as con:
             con.row_factory = sqlite3.Row
             rows = con.execute("SELECT p.id as product_id, p.name, p.price, p.stock, itd.id as detalle_id, itd.quantity, itd.subtotal, s.id as sell_id, s.total, s.date, itd.subtotal, itd.id FROM item_details itd inner join products p on p.id = itd.product_id inner join sells s on s.id = itd.sell_id WHERE itd.sell_id = ?", (sell_id)).fetchall()
