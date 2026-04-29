@@ -1,5 +1,4 @@
 import sqlite3
-from product import Product
 
 class ProductRepository:
 
@@ -16,14 +15,14 @@ class ProductRepository:
                 """
                 CREATE TABLE IF NOT EXISTS products(
                     id integer primary key autoincrement,
-                    name text not null,
+                    name text not null unique,
                     price real not null,
                     stock integer not null default 0
                 )
                 """
             )
 
-    def insertar_producto(self, producto: Product):
+    def insertar_producto(self, producto):
         with self.conectar() as con:
             cur = con.execute(" INSERT INTO products(name, price, stock) values (?, ?, ?)",
                 (
@@ -33,6 +32,7 @@ class ProductRepository:
             return True
         
     def get_all_products(self):
+        from product import Product
         with self.conectar() as con:
             con.row_factory = sqlite3.Row
             rows = con.execute("SELECT * FROM products").fetchall()
@@ -45,14 +45,14 @@ class ProductRepository:
     def get_stock_product(self, id):
         with self.conectar() as con:
             con.row_factory = sqlite3.Row
-            row = con.execute(f"SELECT stock FROM products where id ={id}").fetchone()
+            row = con.execute("SELECT stock FROM products where id = ?", (id)).fetchone()
             return row["stock"]
         
     def delete_product(self, id):
         try:
             with self.conectar() as con:
                 con.row_factory = sqlite3.Row
-                row = con.execute(f"DELETE FROM products where id ={id}")
+                row = con.execute("DELETE FROM products where id = ?", (id))
                 return True
         except:
             return False

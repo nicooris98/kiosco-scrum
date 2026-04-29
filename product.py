@@ -1,5 +1,5 @@
 class Product:
-    def __init__(self,name, price, stock, id=0):
+    def __init__(self,name, price, stock, id=None):
         if price < 0:
             raise ValueError("Precio negativo")
         self._id = id
