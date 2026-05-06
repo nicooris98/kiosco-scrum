@@ -7,9 +7,9 @@ class ProductRepository:
 
     def create(self, session: Session, product_in: ProductCreate) -> ProductRead:
         product = Product.model_validate(product_in)
-        session.add(product)
-        session.commit()
-        session.refresh(product)
+        session.add(product) #insert
+        session.commit() #confirmacion
+        session.refresh(product) #flush
         return ProductRead.model_validate(product)
 
     def get_by_id(self, session: Session, product_id: int) -> Optional[ProductRead]:

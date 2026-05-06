@@ -1,6 +1,7 @@
 __pycache__
 
 kiosco.db
+database.db
 
 .venv/
 
